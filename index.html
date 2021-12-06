@@ -81,6 +81,18 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2020/12/08/%E5%AE%9E%E7%8E%B0strStr/">实现strStr()</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-12-08</span>
+      <p><p>int strStr(char * haystack, char * needle){<br> int i,j,k,n=0;<br>    if(strlen(needle)==0) return 0;<br>    for(i=0;i&lt;strlen(haystack);i++){<br>        if(haystack[i]==needle[0]){<br>            k=i;<br>           for(j=0;j&lt;strlen(needle);j++){<br>               if(haystack[i]==needle[j]) {<br>                   i++;<br>                   n=1;<br>               }<br>               else if(haystack[i]!=needle[j]){<br>                   i=k;j=0;<br>                   n=0;<br>                   break;<br>               }<br>           }<br>           if(j==strlen(needle))break;<br>        }<br>    }</p>
+<pre><code>if(!n) return -1;
+return k;</code></pre>
+<p>}<br>//超出时间限制</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2020/12/08/%E5%AE%9E%E7%8E%B0strStr/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2020/12/03/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">有效的括号</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-12-03</span>
       <p><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="有效括号"><a href="#有效括号" class="headerlink" title="有效括号"></a>有效括号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;&#123;&#39;，&#39;&#125;&#39;，&#39;[&#39;，&#39;]&#39; 的字符串，判断字符串是否有效。</span><br><span class="line">有效字符串需满足：</span><br><span class="line">左括号必须用相同类型的右括号闭合。</span><br><span class="line">左括号必须以正确的顺序闭合。</span><br><span class="line">注意空字符串可被认为是有效字符串。</span><br></pre></td></tr></table></figure>
