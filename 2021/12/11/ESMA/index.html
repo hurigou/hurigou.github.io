@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>桥穆边境</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="家源">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'hurigou',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'null'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "greenish",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+<div class="single">
+
+<div id="page">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
+    <span>2021-12-11</span>
+    <h2></h2>
+    
+    </div>
+</div>
+</div>
+
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <h2 id="变量特性"><a href="#变量特性" class="headerlink" title="变量特性"></a>变量特性</h2><ol>
+<li><p>变量不能重复声明，变量声明关键字：let</p>
+</li>
+<li><p>块作用域，只能在一个模块中使用，出了模块，使用就会报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如：</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(a);<span class="comment">// 报错</span></span><br><span class="line"><span class="comment">// 特殊情况</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(a);</span><br><span class="line">		&#125;</span><br><span class="line">		fn();<span class="comment">// 可执行，也就是说，他不影响作用域链</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不存在变量提升：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(song);</span><br><span class="line"><span class="keyword">var</span> song = <span class="string">&#x27;恋爱达人&#x27;</span>;<span class="comment">//这个undefine</span></span><br><span class="line"><span class="keyword">let</span> song = <span class="string">&#x27;恋爱达人&#x27;</span>;<span class="comment">//这个就报错</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="常量声明"><a href="#常量声明" class="headerlink" title="常量声明"></a>常量声明</h2><ol>
+<li><p>关键字：const</p>
+</li>
+<li><p>定义时一定要赋初始值，且不能被修改</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> school = <span class="string">&#x27;gzmtu&#x27;</span>;</span><br><span class="line">not&#123;</span><br><span class="line">	<span class="keyword">const</span> school;</span><br><span class="line">    school = <span class="string">&#x27;gggg&#x27;</span>; <span class="comment">// 不能修改常量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>块作用域</p>
+</li>
+<li><p>对于定义的数组和对象的修改不会报错</p>
+</li>
+</ol>
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><ol>
+<li><p>数组和对象</p>
+<p>数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> art = [<span class="string">&#x27;赵本山&#x27;</span>, <span class="string">&#x27;小沈阳&#x27;</span>, <span class="string">&#x27;吴彦祖&#x27;</span>];</span><br><span class="line"><span class="keyword">let</span> [zhao,xiao,wu] = art;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zhao = &#123;</span><br><span class="line">    name:<span class="string">&quot;赵本山&quot;</span>,</span><br><span class="line">    age:<span class="string">&quot;undefine&quot;</span>,</span><br><span class="line">    sex:<span class="string">&quot;male&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123;name,age,sex&#125; = zhao;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><ol>
+<li><p>可以定义一个字符串</p>
+</li>
+<li><p>在浏览器编译时，可以编译出里面字符串带有的回车符</p>
+</li>
+<li><p>变量拼接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;10086&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> out = <span class="string">&quot;$&#123;a&#125;吸血鬼,寄生虫&quot;</span>;<span class="comment">// 10086吸血鬼,寄生虫</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><ol>
+<li><p>省略括号：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当参数只有一个的时候，可以省略括号</span></span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="params">x</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>省略花括号：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当函数体只有一句话时，可以省略花括号,而且同时还要去掉return语句</span></span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="params">x</span> =&gt;</span> x * x;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h2><ol>
+<li><p>形参可以赋初值，具有默认值的参数，一般位置比较靠后</p>
+</li>
+<li><p>与解构赋值结合</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params">&#123;host,username,password,port&#125;</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">do</span> something</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">connect(&#123;</span><br><span class="line">    host:<span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">    username:<span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">    port:<span class="number">3306</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="rest-参数"><a href="#rest-参数" class="headerlink" title="rest 参数"></a>rest 参数</h2><ol>
+<li><p>rest 参数必须放在最后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a,s,d,...args</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(args);</span><br><span class="line"> <span class="comment">// 输出一个数组   </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="拓展运算符"><a href="#拓展运算符" class="headerlink" title="拓展运算符"></a>拓展运算符</h2><ol>
+<li><p>数组的合并</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 数组的合并</span><br><span class="line">    const a &#x3D; [&#39;aa&#39;,&#39;bb&#39;];</span><br><span class="line">    const b &#x3D; [&#39;bb&#39;,&#39;dd&#39;];</span><br><span class="line">    const hebing &#x3D; [...a, ...b];</span><br><span class="line">    console.log(hebing);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组的克隆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F; 数组的克隆</span><br><span class="line">    const ss &#x3D; [&#39;e&#39;,&#39;g&#39;,&#39;m&#39;];</span><br><span class="line">    const cc &#x3D; [...ss]</span><br><span class="line">    console.log(cc);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将伪数组变成真正的数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将伪数组变成真正的数组</span></span><br><span class="line">    <span class="keyword">const</span> divs = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> divArr = [...divs];</span><br><span class="line">    <span class="built_in">console</span>.log(divArr);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><ol>
+<li><p>原生具备Iterator接口（属性）的数据可以调用：for…of遍历</p>
+</li>
+<li><p>主要有：Array Arguments Set Map String TypeArray NodeList</p>
+</li>
+<li><p>不同于for…in 返回的是数组下标，for…of 返回的是数组的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有的div,并遍历</span></span><br><span class="line"><span class="keyword">let</span> divs = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> div <span class="keyword">of</span> divs) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(div.innerText);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="Promise解决异步代码"><a href="#Promise解决异步代码" class="headerlink" title="Promise解决异步代码"></a>Promise解决异步代码</h2><ol>
+<li>Promise 是一个构造器用来封装异步代码，返回其成功和失败的结果</li>
+<li></li>
+<li></li>
+</ol>
+<h2 id="Set集"><a href="#Set集" class="headerlink" title="Set集"></a>Set集</h2><ol>
+<li><p>数组去重</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>];</span><br><span class="line"><span class="comment">// 数组去除重复数字</span></span><br><span class="line"><span class="keyword">let</span> arr1 = [...Set(arr)]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>数组交集</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> arr4 = [<span class="number">4</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>];</span><br><span class="line"><span class="comment">// 先去除重复数字,然后filter函数过滤不需要的值</span></span><br><span class="line"><span class="keyword">let</span> arr5 = [...new <span class="built_in">Set</span>(arr4)].filter(<span class="function"><span class="params">item</span> =&gt;</span><span class="keyword">new</span> <span class="built_in">Set</span>(arr).has(item));</span><br><span class="line"><span class="built_in">console</span>.log(arr5)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ps：对于filter函数，条件返回值为真的就是返回的值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组的差集</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组的差集(在arr4中有的，而arr中没有的)</span></span><br><span class="line"><span class="keyword">let</span> arr8 = [...new <span class="built_in">Set</span>(arr4)].filter(<span class="function"><span class="params">item</span> =&gt;</span>!(<span class="keyword">new</span> <span class="built_in">Set</span>(arr).has(item)));</span><br><span class="line"><span class="built_in">console</span>.log(arr8) <span class="comment">// 6,7</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="数值扩展"><a href="#数值扩展" class="headerlink" title="数值扩展"></a>数值扩展</h2><ol>
+<li><p><em>Number.EPSILON</em> 可以用来处理浮点型数值加法运算时的问题比如</p>
+<p>笔记： <a href="Test%5C%E6%95%B0%E5%80%BC%E6%8B%93%E5%B1%95.html">数值拓展.html</a> </p>
+</li>
+</ol>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><ol>
+<li><p>暴露</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别暴露</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> school = <span class="string">&#x27;atguigu&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 统一暴露</span></span><br><span class="line"><span class="keyword">let</span> school = <span class="string">&#x27;atguigu&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findJob</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;我们可以帮你找工作&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span>&#123;</span><br><span class="line">	school,</span><br><span class="line">    findJob</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认暴露</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line"> <span class="comment">// 任意类型</span></span><br><span class="line">    school:<span class="string">&#x27;atguigu&#x27;</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通用方式</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> name <span class="keyword">from</span> <span class="string">&quot;地址&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解构赋值形式</span></span><br><span class="line"><span class="keyword">import</span> &#123;school <span class="keyword">as</span> guigu,teach,...&#125; <span class="keyword">from</span> <span class="string">&quot;地址&quot;</span> <span class="comment">// 该变量可以直接用</span></span><br><span class="line"><span class="comment">// school as guigu 别名，防止重名的报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认暴露的引入</span></span><br><span class="line"><span class="keyword">import</span> &#123;<span class="keyword">default</span> <span class="keyword">as</span> m1&#125; <span class="keyword">from</span> <span class="string">&quot;地址&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 简便形式的引入</span></span><br><span class="line"><span class="keyword">import</span> m2 <span class="keyword">from</span> <span class="string">&quot;地址&quot;</span> <span class="comment">// 接下来这个常用，需要重点记忆</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>入口文件的使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一个特别的入口文件app.js</span></span><br><span class="line"><span class="comment">// 引入的方法与之前的一样</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="数组扩展"><a href="#数组扩展" class="headerlink" title="数组扩展"></a>数组扩展</h2><ul>
+<li>笔记: <a href="Test%5C%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95.html">数组扩展.html</a> </li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2021/12/07/note%E9%A1%B9%E7%9B%AE/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3></h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">桥穆边境</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button> 
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar.jpeg" alt="家源"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>家源</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a target="_blank" rel="noopener" href="https://hurigou.github.io">github</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://mail.qq.com/cgi-bin/frame_html?sid" target="_blank">qq邮箱</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+</html>
