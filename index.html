@@ -81,6 +81,26 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2021/12/16/%E4%BD%93%E9%AA%8C%E7%9A%84%E5%AE%9E%E4%B9%A0%E7%94%9F%E6%B4%BB/"></a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2021-12-16</span>
+      <p><h2 id="使用SpringBoot框架"><a href="#使用SpringBoot框架" class="headerlink" title="使用SpringBoot框架"></a>使用SpringBoot框架</h2><ul>
+<li><p>遇到的问题1：</p>
+<p>在mapper写数据库的代码时，使用注意要点：</p>
+<ol>
+<li><p>使用Select语句时，返回的类型如果是列表，则写它的泛型如：ClassifyDO</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;QueryClassifyByID&quot; resultType=&quot;ClassifyDO&quot; parameterType=&quot;int&quot;&gt;</span><br><span class="line">        <span class="keyword">select</span> classification_id <span class="keyword">as</span> classificationID,...</span><br><span class="line">        <span class="keyword">from</span> classify</span><br><span class="line">        <span class="keyword">where</span> classification_parent_id = <span class="comment">#&#123;classifyID&#125;</span></span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还是使用Select语句的时候，假如写的对象Bean与数据库表的列不一样，比如数据库中分类表的id是classify_id而Bean对象的分类对象是classifyID，那么再写Select语句时记得给对应的列添加别名，该别名就是Bean对象对应的值。如上代码所示。</p>
+</li>
+</ol>
+</li>
+</ul>
+</p>
+      <div class="post-button"><a class="btn" href="/2021/12/16/%E4%BD%93%E9%AA%8C%E7%9A%84%E5%AE%9E%E4%B9%A0%E7%94%9F%E6%B4%BB/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2021/12/11/ESMA/"></a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2021-12-11</span>
       <p><h2 id="变量特性"><a href="#变量特性" class="headerlink" title="变量特性"></a>变量特性</h2><ol>
