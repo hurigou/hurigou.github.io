@@ -89,6 +89,12 @@
 </li>
 <li><p>还是使用Select语句的时候，假如写的对象Bean与数据库表的列不一样，比如数据库中分类表的id是classify_id而Bean对象的分类对象是classifyID，那么再写Select语句时记得给对应的列添加别名，该别名就是Bean对象对应的值。如上代码所示。</p>
 </li>
+<li><p>如果传入的参数有Bean对象和其他的参数，此时在匹配Bean对象的时候需要注意使用对象.属性的方法：</p>
+<p>举个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--通过分类ID修改分类--&gt;</span><br><span class="line">    &lt;update id=&quot;changeClassificationByID&quot;&gt;</span><br><span class="line">        <span class="keyword">update</span> classify</span><br><span class="line">        <span class="keyword">set</span> classification_name = <span class="comment">#&#123;vo.classifyName&#125;,classification_parent_id = #&#123;vo.classifyParentID&#125;,has_commodity = #&#123;vo.hasCommodity&#125;</span></span><br><span class="line">        <span class="keyword">where</span> classification_id = <span class="comment">#&#123;classifyID&#125;</span></span><br><span class="line">    &lt;/<span class="keyword">update</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中vo对象如果需要使用里面的属性，那么就需要采用<code>对象.属性</code>的方法</p>
+</li>
 </ol>
 </li>
 </ul>
