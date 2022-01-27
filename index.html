@@ -81,6 +81,300 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2022/01/27/ssm%E5%9F%BA%E7%A1%80/"></a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2022-01-27</span>
+      <p><h1 id="一、快速入门"><a href="#一、快速入门" class="headerlink" title="一、快速入门"></a>一、快速入门</h1><h2 id="1-1-spring的体系结构"><a href="#1-1-spring的体系结构" class="headerlink" title="1.1 spring的体系结构"></a>1.1 spring的体系结构</h2><p>​    重要部分是Core Container。核心容器，基础建设。</p>
+<p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220114224155525.png" alt="image-20220114224155525"></p>
+<h2 id="1-2-快速入门"><a href="#1-2-快速入门" class="headerlink" title="1.2 快速入门"></a>1.2 快速入门</h2><ul>
+<li><p>spring程序开发步骤</p>
+<p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220114224951746.png" alt="image-20220114224951746"></p>
+</li>
+</ul>
+<ol>
+<li>定位。在maven项目中的pom.xml文件中添加org.springframework的定位，需要注意的是：配置这个的版本号后面需要选择x.x.x.xRELEASE。后面包含RELEASE的版本，不然在创建applicationContext.xml文件的时候会出现问题。</li>
+<li>创建好dao接口和dao的实现类。</li>
+<li>在resource目录下创建applicationContext.xml(名字是任意的，但建议用这个名字)文件，配置bean对象。</li>
+<li>创建测试类测试。调用ApplicationContext app = new ClassPathApplicationXmlContext(“对应的spring配置文件”)。然后app.getBean(“配置的daoImpl”)。时获取的对象调用方法即可。</li>
+</ol>
+<h1 id="二、配置文件"><a href="#二、配置文件" class="headerlink" title="二、配置文件"></a>二、配置文件</h1><h2 id="2-1-spring配置文件"><a href="#2-1-spring配置文件" class="headerlink" title="2.1 spring配置文件"></a>2.1 spring配置文件</h2><ul>
+<li>scope的两种属性：<ol>
+<li>singleton. 当scope的属性设置为这个属性时，bean对象只会创建一次；也就是在new ClassPathApplicationXmlContext(“xxxx”)被创建出来，通过该对象getBean出来的对象都是同一个对象（对象的地址一样）</li>
+<li>prototype. 当scope的属性设置为prototype时，bean的对象在每次getBean的时候被创建，被调用一次getBean时，bean对象就会被创建一次。</li>
+</ol>
+</li>
+<li>生命周期属性：<ol>
+<li>init-method 初始化方法。当配置文件中又该属性的时候，在创建bean对象的时候回想调用对应的方法（自己定义的），这个方法很像vue里面的beforCreate方法，可以设置在调用bean对象的时候做一定的判断操作。</li>
+<li>destroy-method 销毁方法。当配置这个属性的时候，在销毁bean对象的时候，会调用其对应的方法，这个方法跟vue里面的destory周期函数很像。（注意：如果在测试的时候没有手动调用close方法，对应的方法可能来不及被调用程序就被摧毁了，所以在写代码的时候，尽可能自己调用这些close，如数据库连接的关闭等）该方法可以处理再销毁bean对象的时候做一些收尾工作。</li>
+</ol>
+</li>
+<li>bean的创建方式：<ol>
+<li>构造函数创建(重点)。照上面的来就是通过构造函数进行创建bean对象。</li>
+<li>静态工厂。首先需要创建一个工厂的类对象，里面编写对应的静态方法，处理好相应的逻辑后就将对应的对象返回即可。(注意是<strong>静态的</strong>)</li>
+<li>工厂实例化。跟静态工厂差不多，唯一不同的就是方法不是静态的，需要编写工厂的bean对象，给他一个id，然后再写一个bean对象，通过factory-bean调用工厂对象，通过factory-method调用工厂里面的方法。</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-2-配置文件的注入"><a href="#2-2-配置文件的注入" class="headerlink" title="2.2 配置文件的注入"></a>2.2 配置文件的注入</h2><ul>
+<li>注入的方法有两种：类的setter方法和构造函数。适用于在一个实现类中调用另一个使用spring容器封装的bean对象。<ol>
+<li>setter方法注入。一般情况下，先定义需要引用的对象，然后通过编写setter方法，给该对象赋值。然后在配置文件中使用property标签将对象注入到对应的文件中。</li>
+<li>构造函数的注入。一样也要定义好对应的私有对象。然后通过构造函数给对象赋值(一般定义了有参构造，无参也顺便写一下)，然后在配置文件中使用constructor-arg标签，给bean对象赋值。</li>
+</ol>
+</li>
+<li>集合的注入。<ol>
+<li>对于数据较多的数据类型的注入，一般采用setter方法的注入。</li>
+<li>一般写在property标签里面，在里面根据相对应的数据类型写对应的标签。比如List列表就用list标签</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-3-配置文件的重点配置"><a href="#2-3-配置文件的重点配置" class="headerlink" title="2.3 配置文件的重点配置"></a>2.3 配置文件的重点配置</h2><p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220118153935074.png" alt="image-20220118153935074"></p>
+<h2 id="2-4-从xml配置文件中加载properties文件"><a href="#2-4-从xml配置文件中加载properties文件" class="headerlink" title="2.4 从xml配置文件中加载properties文件"></a>2.4 从xml配置文件中加载properties文件</h2><ul>
+<li><p>添加命名空间</p>
+<ol>
+<li>参照bean的命名空间，直接复制一份，把所有的bean改成context（因为需要在context的命名空间之下才可以）也就是这个：<strong>xmlns=”<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/beans&quot;**%E6%94%B9%E6%88%90">http://www.springframework.org/schema/beans&quot;**改成</a></strong>xmlns:context=”<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context&quot;**%E8%BF%99%E4%B8%AA%E3%80%82">http://www.springframework.org/schema/context&quot;**这个。</a></li>
+</ol>
+</li>
+<li><p>添加约束路径</p>
+<ol>
+<li><p>复制bean的路径约束： <strong><a target="_blank" rel="noopener" href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a> <a target="_blank" rel="noopener" href="http://www.springframework.org/schema/beans/spring-beans.xsd">http://www.springframework.org/schema/beans/spring-beans.xsd</a></strong> 把所有的bean改成context</p>
+<p>也就是： <strong><a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context">http://www.springframework.org/schema/context</a>  <a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context/spring-context.xsd">http://www.springframework.org/schema/context/spring-context.xsd</a></strong></p>
+</li>
+</ol>
+</li>
+<li><p>加载外部properties文件</p>
+<ol>
+<li><p>添加以下标签（在类加载路径‘resources目录’中加载jdbc.properties文件）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath:jdbc.properties&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>使用properties文件的内容</p>
+<ol>
+<li><p>使用**${}**的样式将properties中的属性引进xml文件中。像这样</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">引入的jdbc.url user password</span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.user&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>步骤</p>
+</li>
+</ul>
+<p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220119132533572.png" alt="image-20220119132533572"></p>
+<h1 id="三、注解"><a href="#三、注解" class="headerlink" title="三、注解"></a>三、注解</h1><h2 id="3-1-原始注解"><a href="#3-1-原始注解" class="headerlink" title="3.1 原始注解"></a>3.1 原始注解</h2><p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220119222413205.png" alt="image-20220119222413205"></p>
+<ul>
+<li>实例化Bean对象<ol>
+<li>@Component注解在任意层都可以使用，但是可读性不高。</li>
+<li>@Controller、@Service、@Repository对应在web、service、dao层中使用，都可以使用@Component替代。</li>
+</ol>
+</li>
+<li>数据的注入<ol>
+<li>@Autowired和@Qualifier。一般@Qualifier结合一起使用，使用@Qualifier(“特定的bean的id”)。当bean的对象中有一个时，也可以省去@Qualifier标签。</li>
+<li>@Resource。它相当于@Autowired和@Qualifier的两个结合。</li>
+<li>@Value。给类的普通属性赋值。由于在java类中做不到像在xml文件中的${}模板解析操作。当引入这个注解时，便可解决这个问题。</li>
+<li>@Scope。这个注解跟之前提到的Bean中的Scope属性是一样的。</li>
+<li>@PostConstruct和@PreDestroy。这两个注解相当于之前说的init-method和destroy-method方法。</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-2-新注解"><a href="#3-2-新注解" class="headerlink" title="3.2 新注解"></a>3.2 新注解</h2><p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220120123615672.png" alt="image-20220120123615672"></p>
+<ul>
+<li><p>@Configuration和@Import。有这个注解表明从这个类中生成所需要的Bean对象。也就是说这个文件作为主要的配置文件加载。Bean容器从这个java类加载。然后通过@Import注解加载其他模块的Bean对象。有一点需要注意的是在加载Spring容器时使用以下代码。也就是加载java类的配置文件初始化Spring容器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext app = <span class="keyword">new</span> AnnotationConfigApplicationContext(XXX.class)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@ComponentScan。由于用到注解，一般情况下都需要给一个根目录让他进行扫描，从哪个包中加载Bean对象。它相当于</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;根目录&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@Bean。当使用外部的数据源的时候，无法将外部的数据进行封装成bean对象存起来的时候，就可以使用这个注解了。将该注解放在定义的方法之上，然后该注解会将该方法的返回值封装成一个bean对象存到Spring容器中去。</p>
+</li>
+<li><p>@PropertySource。用于加载properties文件属性。它经常会配合@Value注解使用。</p>
+</li>
+</ul>
+<h2 id="3-3-Spring集成Junit开发"><a href="#3-3-Spring集成Junit开发" class="headerlink" title="3.3 Spring集成Junit开发"></a>3.3 Spring集成Junit开发</h2><ul>
+<li><p>在编写代码的时候每次测试的时候都需要使用以下这两段代码。为了节省时间，便使用Junit集成开发。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext app = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">ApplicationContext app = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>首先把对应的依赖包定位好。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.6.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建测试类，并加入spring集成的Junit加入</p>
+<ol>
+<li>使用@RunWith(SpringJUnit4ClassRunner.class)替代加载配置文件的代码。</li>
+<li>使用@ContextConfiguration(xml配置文件)加载spring容器。</li>
+<li>然后照常写就行了。</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-4-spring集成web"><a href="#3-4-spring集成web" class="headerlink" title="3.4 spring集成web"></a>3.4 spring集成web</h2><ul>
+<li><p>添加必要的几个依赖</p>
+<ol>
+<li>spring-context spring工程都需要引入的必要包</li>
+<li>spring-web 整合到web中所需要的包</li>
+<li>servlet-api和jsp 请求转发所需要的包</li>
+</ol>
+</li>
+<li><p>所有的bean对象跟之前一样，使用注解的话就需要在applicationContext.xml文件中添加包扫描标签</p>
+</li>
+<li><p>在web.xml文件中</p>
+<ol>
+<li><p>设置全局的参数初始化</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    // classpath 类加载路径</span><br><span class="line">   <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置监听器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span></span><br><span class="line">        org.springframework.web.context.ContextLoaderListener</span><br><span class="line">    <span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>配置servlet程序</p>
+<ol>
+<li><p>通过this.getServletContext();获取上下文</p>
+</li>
+<li><p>获取spring容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebApplicationContext app = WebApplicationContextUtils.getWebApplicationContext(servletContext);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跟之前一样了。。。。。。。。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="四、SpringMVC"><a href="#四、SpringMVC" class="headerlink" title="四、SpringMVC"></a>四、SpringMVC</h1><h2 id="4-1-快速入门"><a href="#4-1-快速入门" class="headerlink" title="4.1 快速入门"></a>4.1 快速入门</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li><p>加入spring-webmvc依赖，当然其它的包一样加进去。</p>
+</li>
+<li><p>配置springMVC前端控制器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 当第一次加载时执行一遍 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 每次访问资源时都执行一遍 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置controller和jsp前端视图</p>
+<ol>
+<li>先将controller加入spring容器。</li>
+<li>使用@RequestMapping(“/请求地址”)映射请求地址</li>
+<li>返回视图文件（jsp）</li>
+</ol>
+</li>
+<li><p>配置springMVC的xml文件<strong>init-param标签</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置springMVC前端控制器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 加载spring-mvc的配置 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:spring-mvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 当第一次加载时执行一遍 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署即可。</p>
+</li>
+</ul>
+<h3 id="图片说明"><a href="#图片说明" class="headerlink" title="图片说明"></a>图片说明</h3><p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220123093527185.png" alt="image-20220123093527185"></p>
+<h2 id="4-2-springMVC组件解析"><a href="#4-2-springMVC组件解析" class="headerlink" title="4.2 springMVC组件解析"></a>4.2 springMVC组件解析</h2><h3 id="springMVC的执行流程"><a href="#springMVC的执行流程" class="headerlink" title="springMVC的执行流程"></a>springMVC的执行流程</h3><p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220123161505502.png" alt="image-20220123161505502"></p>
+<h2 id="4-3-springMVC组件注解"><a href="#4-3-springMVC组件注解" class="headerlink" title="4.3 springMVC组件注解"></a>4.3 springMVC组件注解</h2><ul>
+<li><p>@RequestMapping。请求映射。</p>
+<ol>
+<li>用在方法之上。其意思是指当前路径下对应的一个servlet程序。</li>
+<li>用在类名之上。是指在模块分类。比如@RequestMapping(“/user”)：是指在用户这一模块下，对应的servlet程序。</li>
+<li>参数。<ol>
+<li>@RequestMapping(value=”/xxxx”,method=RequestMethod.GET/POST…,params = {“name”,”id…”})</li>
+<li>value。是指对应的servlet路径。</li>
+<li>method。是指对前端的请求参数要一定的要求。比如要求发送post请求就不能处理get请求。</li>
+<li>params。设置这一项是要求请求必须含有对应的参数名，否则不予处理。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>组件扫描</p>
+<p>组件扫描的另一种方式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;hurigou.com&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 不扫描hurigou.com下的Controller注解 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">context:exclude-filter</span> <span class="attr">type</span>=<span class="string">&quot;annotation&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;org.springframework.stereotype.Controller&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 只扫描hurigou.com下的Controller注解 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">&quot;annotation&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;org.springframework.stereotype.Controller&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="4-4-视图解析器配置"><a href="#4-4-视图解析器配置" class="headerlink" title="4.4 视图解析器配置"></a>4.4 视图解析器配置</h2><ul>
+<li><p>REDIRECT_URL_PREFIX：”redirect:”。这个变量是一个静态变量。在Controller中返回的视图文件加上这个的话，跳转的时候地址栏会发生变化，也就是说发生了请求重定向。</p>
+</li>
+<li><p>FORWARD_URL_PREFIX：”forward:”。同样也是一个静态变量。在默认的情况下（什么也不写），跟写这个是一样的效果。发起请求地址是不变的，也就是发生了转发而不是重定向。</p>
+</li>
+<li><p>在写Controller层的时候，有时候不想写文件的前置模块（比如user模块）和后缀（文件拓展名），那就直接配置即可，用到<code>prefix </code> 和 <code>suffix</code> 这两个前缀和后缀。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;viewResolver&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 两个标签可以同时使用 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/user/&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.jsp&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>prefix。当配置这个标签后，不管是在什么模块中，Controller层中返回的视图文件都不需要写它的全路径，只要文件名和文件拓展名。</li>
+<li>suffix。配置这个标签后，同样是在Controller层中，返回的视图文件不用写文件的拓展名。</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-5-SpringMVC页面跳转"><a href="#4-5-SpringMVC页面跳转" class="headerlink" title="4.5 SpringMVC页面跳转"></a>4.5 SpringMVC页面跳转</h2><ul>
+<li><p>返回字符串形式。快速入门就是使用这种方式。</p>
+</li>
+<li><p>返回ModelAndView形式。可以new一个ModelAndView对象。</p>
+<ol>
+<li>该对象一共有两个部分。</li>
+<li>Model部分是通过调用addObject(“”,””)接口实现。用法与request中的SetAttribute一样。在jsp中使用模板解析${变量名}调用。</li>
+<li>View部分调用setViewName(“name”)接口，直接将所需要的jsp放入即可。</li>
+</ol>
+</li>
+<li><p>还可以通过函数参数的形式，让spring自己创建对象。比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ModelAndView 对象会由spring容器自己创建，当然内容是空的。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">(ModelAndView modelAndView)</span></span>&#123;</span><br><span class="line">    modelAndView.setViewName(<span class="string">&quot;xxxx.jsp&quot;</span>); <span class="comment">// 这里的jsp拓展名如果配置了suffix可以不写</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="4-5-回传数据"><a href="#4-5-回传数据" class="headerlink" title="4.5 回传数据"></a>4.5 回传数据</h2><ul>
+<li><p>回传字符串。需要在对应的方法之前加上@ResponseBody注解。</p>
+</li>
+<li><p>回传对象和集合。</p>
+<ol>
+<li><p>手动加入jackJson的三大依赖。然后通过new ObjectMapper()来将对象转换成Json数据</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.13.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加入mvc命名空间。然后加载mvc注解驱动，当加入该段配置后，在Controller层中返回的对象都会自动的转换成json格式的数据。并且在以后的spring-mvc配置文件中，首先要做的就是这一步。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 加载mvc注解驱动 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-6-获取请求数据"><a href="#4-6-获取请求数据" class="headerlink" title="4.6 获取请求数据"></a>4.6 获取请求数据</h2><ul>
+<li>获取请求参数。<ol>
+<li></li>
+</ol>
+</li>
+</ul>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p><img src="C:\Users\小咪\AppData\Roaming\Typora\typora-user-images\image-20220120233343399.png" alt="image-20220120233343399"></p>
+<ul>
+<li>java类在加载中会经过三个过程（反射机制）<ol>
+<li>javac编译。此时将java类文件编译成class字节码文件，并且此时的类是还没有进入内存的，它还在硬盘当中。</li>
+<li>class类对象阶段。在文件编译成class字节码文件时，通过类加载器(ClassLoader)将关于类的所有的共同点都封装起来。<ol>
+<li>成员变量封装成Field[]数组。</li>
+<li>构造方法封装成Constructor[]数组。</li>
+<li>成员方法封装成Method[]数组。</li>
+</ol>
+</li>
+<li>运行时阶段。此时类已经被加载到内存当中，用于执行了。</li>
+</ol>
+</li>
+</ul>
+</p>
+      <div class="post-button"><a class="btn" href="/2022/01/27/ssm%E5%9F%BA%E7%A1%80/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2021/12/23/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"></a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2021-12-23</span>
+      <p><h3 id="DAO的实现类"><a href="#DAO的实现类" class="headerlink" title="DAO的实现类"></a>DAO的实现类</h3><ul>
+<li><p>需要查找一组数据时，返回的是一个PreparedStatement类型的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需要将PreparedStatement的对象.next()方法才可以使用，如：</span></span><br><span class="line">conn=JDBCUtil.getConnection();</span><br><span class="line">        pstmt=conn.prepareStatement(sql);</span><br><span class="line">        rs=pstmt.executeQuery();</span><br><span class="line">        <span class="comment">/*if(rs.next())&#123;</span></span><br><span class="line"><span class="comment">         book = new Book();</span></span><br><span class="line"><span class="comment">         book.setBookID(rs.getString(&quot;bookID&quot;));</span></span><br><span class="line"><span class="comment">         book.setBookName(rs.getString(&quot;bookName&quot;));</span></span><br><span class="line"><span class="comment">         book.setContent(rs.getString(&quot;content&quot;));</span></span><br><span class="line"><span class="comment">       &#125;*/</span></span><br><span class="line">	   books = <span class="keyword">new</span> ArrayList&lt;Book&gt;();</span><br><span class="line">		<span class="comment">// 需要.next()之后才可以使用</span></span><br><span class="line">	   <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">		   book = <span class="keyword">new</span> Book();</span><br><span class="line">		   book.setBookID(rs.getString(<span class="string">&quot;bookID&quot;</span>));</span><br><span class="line">           book.setBookName(rs.getString(<span class="string">&quot;bookName&quot;</span>));</span><br><span class="line">          ...</span><br><span class="line">		   book.setCover(rs.getString(<span class="string">&quot;cover&quot;</span>));</span><br><span class="line">		   book.setType(rs.getString(<span class="string">&quot;type&quot;</span>));</span><br><span class="line">		   books.add(book);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</p>
+      <div class="post-button"><a class="btn" href="/2021/12/23/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2 class="title"><a href="/2021/12/19/noteBook%E5%B0%8F%E9%A1%B9%E7%9B%AE/"></a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2021-12-19</span>
+      <p><h2 id="写笔记遇到的错误（使用javaweb）"><a href="#写笔记遇到的错误（使用javaweb）" class="headerlink" title="写笔记遇到的错误（使用javaweb）"></a>写笔记遇到的错误（使用javaweb）</h2><ul>
+<li><p>使用表单提交，后端使用<code>@WebServlet</code>注解时注意事项：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 括号里面要么直接写路径</span></span><br><span class="line"><span class="meta">@WebServlet(&quot;/addClassify&quot;)</span></span><br><span class="line"><span class="comment">// 要么就写下面这样的样式</span></span><br><span class="line"><span class="meta">@WebServlet(urlPatterns = &quot;/addClassify&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>像具体了解该注解，请移步<a target="_blank" rel="noopener" href="https://blog.csdn.net/SlingDam/article/details/103882737">@webServlet</a>查看详情</p>
+</li>
+</ul>
+</p>
+      <div class="post-button"><a class="btn" href="/2021/12/19/noteBook%E5%B0%8F%E9%A1%B9%E7%9B%AE/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2021/12/16/%E4%BD%93%E9%AA%8C%E7%9A%84%E5%AE%9E%E4%B9%A0%E7%94%9F%E6%B4%BB/"></a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2021-12-16</span>
       <p><h2 id="使用SpringBoot框架"><a href="#使用SpringBoot框架" class="headerlink" title="使用SpringBoot框架"></a>使用SpringBoot框架</h2><ul>
@@ -102,7 +396,7 @@
 </li>
 </ul>
 </p>
-      <div class="post-button"><a class="btn" href="/2021/12/16/%E4%BD%93%E9%AA%8C%E7%9A%84%E5%AE%9E%E4%B9%A0%E7%94%9F%E6%B4%BB/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2021/12/16/%E4%BD%93%E9%AA%8C%E7%9A%84%E5%AE%9E%E4%B9%A0%E7%94%9F%E6%B4%BB/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -250,7 +544,7 @@
 <li>笔记: <a href="Test%5C%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95.html">数组扩展.html</a> </li>
 </ul>
 </p>
-      <div class="post-button"><a class="btn" href="/2021/12/11/ESMA/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2021/12/11/ESMA/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -268,7 +562,7 @@
 </li>
 </ul>
 </p>
-      <div class="post-button"><a class="btn" href="/2021/12/07/note%E9%A1%B9%E7%9B%AE/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2021/12/07/note%E9%A1%B9%E7%9B%AE/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -280,7 +574,7 @@
 return k;</code></pre>
 <p>}<br>//超出时间限制</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/12/08/%E5%AE%9E%E7%8E%B0strStr/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/12/08/%E5%AE%9E%E7%8E%B0strStr/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -302,7 +596,7 @@ return k;</code></pre>
 <h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>首先都清楚题目，在五个示例中，第五个示例其实还包括像这种<code>[&#123;&#125;]</code>情况；在开始前我还以为是只允许示例五这种情况；所以所以我全部用if~else结构来写并且我只考虑了<code>&#123;&#125;</code>里面包含括号的情况（也就是我只考虑左边字符，然后再判断下一个字符是否为右字符），在运行之后发现<code>[&#123;&#125;]</code>这种情况就出现了错误，所以我便摈弃了这种做法；于是我便把之前写的代码全部删除了，吃过上次的亏，这次我用for{switch}结构来书写；在这里我只说个大概，再在代码里把其他的补齐；首先if判断左边字符，再把左边字符赋值给a数组，对应的j自增；再用switch判断a数组中是否有对应的左边字符；最后最关键的是判断j的值；若是有效括号的话，j的值会在最后便会1；要不是的话肯定不是1；而且空字符串也一样返回有效括号，即true；</p>
 <h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">bool isValid(char * s)&#123;</span><br><span class="line">    int i,j&#x3D;1;&#x2F;&#x2F;i为控制for循环的变量；j是一个标识的变量；</span><br><span class="line">    char a[strlen(s)+1];&#x2F;&#x2F;专门存储左边括号的数组；</span><br><span class="line">    if(strlen(s)%2!&#x3D;0) return false;&#x2F;&#x2F;是为了加快执行速度</span><br><span class="line">    for(i&#x3D;0;i&lt;strlen(s);i++)&#123;</span><br><span class="line">        if((s[i]&#x3D;&#x3D;&#39;[&#39;)||(s[i]&#x3D;&#x3D;&#39;(&#39;)||s[i]&#x3D;&#x3D;&#39;&#123;&#39;)&#123;a[j]&#x3D;s[i];j++;&#125;</span><br><span class="line">        &#x2F;*存到a字符串里面去；*&#x2F;</span><br><span class="line">        switch(s[i])&#123;</span><br><span class="line">            case &#39;]&#39;: if(a[j-1]&#x3D;&#x3D;&#39;[&#39;)&#123;j--;break;&#125;else return false;</span><br><span class="line">            case &#39;&#125;&#39;: if(a[j-1]&#x3D;&#x3D;&#39;&#123;&#39;)&#123;j--;break;&#125;else return false;</span><br><span class="line">            case &#39;)&#39;: if(a[j-1]&#x3D;&#x3D;&#39;(&#39;)&#123;j--;break;&#125;else return false;</span><br><span class="line">            &#x2F;*j--的目的就相当于把同对的括号给删除抵消一样；*&#x2F;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(j&#x3D;&#x3D;1)return true;</span><br><span class="line">    else return false;&#x2F;&#x2F;作简单的判断；</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="就像学长第一天跟我们说的一样，自己一个人刷题是很难受的，跟自己舍友同学一起刷渐渐的就有种忘记时间的感觉；所以我建议还是要找一个志同道合的人学习一下；"><a href="#就像学长第一天跟我们说的一样，自己一个人刷题是很难受的，跟自己舍友同学一起刷渐渐的就有种忘记时间的感觉；所以我建议还是要找一个志同道合的人学习一下；" class="headerlink" title="就像学长第一天跟我们说的一样，自己一个人刷题是很难受的，跟自己舍友同学一起刷渐渐的就有种忘记时间的感觉；所以我建议还是要找一个志同道合的人学习一下；"></a>就像学长第一天跟我们说的一样，自己一个人刷题是很难受的，跟自己舍友同学一起刷渐渐的就有种忘记时间的感觉；所以我建议还是要找一个志同道合的人学习一下；</h3></p>
-      <div class="post-button"><a class="btn" href="/2020/12/03/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/12/03/%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -318,7 +612,7 @@ return k;</code></pre>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">int removeDuplicates(int* nums, int numsSize)</span><br><span class="line">&#123;</span><br><span class="line">    int i&#x3D;0,j&#x3D;1;</span><br><span class="line">    if(numsSize&#x3D;&#x3D;0) return 0;</span><br><span class="line">    else</span><br><span class="line">    while(j&lt;numsSize)</span><br><span class="line">    &#123;</span><br><span class="line">        if(nums[i]!&#x3D;nums[j])</span><br><span class="line">        &#123;</span><br><span class="line">            nums[i+1]&#x3D;nums[j];</span><br><span class="line">            i++;j++;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(nums[i]&#x3D;&#x3D;nums[j])</span><br><span class="line">        &#123;</span><br><span class="line">            j++;</span><br><span class="line">            if(j&gt;&#x3D;numsSize) return i+1;&#x2F;&#x2F;如果没有这一步，当j超出范围会直接跳过下一步，i自增；返回i+1；相当于把检测到的相同项一起输了出来；</span><br><span class="line">            while(j&lt;numsSize)</span><br><span class="line">            &#123;</span><br><span class="line">                if(nums[i]!&#x3D;nums[j]) </span><br><span class="line">                &#123;</span><br><span class="line">                    nums[i+1]&#x3D;nums[j];</span><br><span class="line">                    j++;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                else if(nums[i]&#x3D;&#x3D;nums[j]) j++;</span><br><span class="line">                if(j&gt;&#x3D;numsSize) return i+1;&#x2F;&#x2F;同上；</span><br><span class="line">            &#125;i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return i+1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>细心细心，一定要细心；做题的时候最好是现在草稿纸上写好，想法什么的都写下，再慢慢整理思考，然后把做好的代码放到编译器上执行，再修改其他错误；</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/11/27/%E5%85%B3%E4%BA%8E%E5%88%A0%E9%99%A4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/11/27/%E5%85%B3%E4%BA%8E%E5%88%A0%E9%99%A4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -346,60 +640,14 @@ return k;</code></pre>
 <h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int romanToInt(char * s)&#123;</span><br><span class="line">int sum&#x3D;0;</span><br><span class="line">while(*s)&#123;</span><br><span class="line">    switch(*s)&#123;</span><br><span class="line">        case&#39;I&#39;: (*(s+1)&#x3D;&#x3D;&#39;X&#39;||*(s+1)&#x3D;&#x3D;&#39;V&#39;)?(sum-&#x3D;1):(sum+&#x3D;1);break;</span><br><span class="line">        case&#39;V&#39;: sum+&#x3D;5;break;</span><br><span class="line">        case&#39;X&#39;: (*(s+1)&#x3D;&#x3D;&#39;L&#39;||*(s+1)&#x3D;&#x3D;&#39;C&#39;)?(sum-&#x3D;10):(sum+&#x3D;10);break;</span><br><span class="line">        case&#39;L&#39;: sum+&#x3D;50;break;</span><br><span class="line">        case&#39;C&#39;: (*(s+1)&#x3D;&#x3D;&#39;D&#39;||*(s+1)&#x3D;&#x3D;&#39;M&#39;)?(sum-&#x3D;100):(sum+&#x3D;100);break;</span><br><span class="line">        case&#39;D&#39;: sum+&#x3D;500;break;</span><br><span class="line">        case&#39;M&#39;: sum+&#x3D;1000;break;</span><br><span class="line">        default:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    s++;</span><br><span class="line">&#125;</span><br><span class="line">return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><p>这道题目主要要抓住<code>I X C</code>在对应数的右边就加一，左边减一。还要清楚函数传过来的指针是一个字符数组的首地址。</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/11/20/%E5%85%B3%E4%BA%8E%E5%9B%9E%E6%96%87%E6%95%B0%E9%97%AE%E9%A2%98/">关于回文数问题</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-11-20</span>
-      <p><h2 id="回文数"><a href="#回文数" class="headerlink" title="回文数"></a>回文数</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-<p>示例 2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: 10</span><br><span class="line">输出: false</span><br><span class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-number/">链接</a></p>
-<h3 id="写题过程"><a href="#写题过程" class="headerlink" title="写题过程"></a>写题过程</h3><p>刚开始我打把每一位上面的数字都找出来，最后我发现所给的数字可能不只是三位数，可能是四位、五位数，最多到十位数。所以这种方法是很麻烦的。在经过很长时间后，实在想不出来就在题解上找到了非常简单的方法。首先x被10求余就会得到最后面的那一位数字，再将该数字赋值给另一变量。x再除以10就会得到除最后面的所有数字然后返回循环，知道x=0就退出循环；再之后就是简单的判断返回值了。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bool isPalindrome(int x)&#123;</span><br><span class="line">long z&#x3D;0,y&#x3D;x;</span><br><span class="line">if(x&gt;&#x3D;0)&#123;</span><br><span class="line">    while(x!&#x3D;0)&#123;</span><br><span class="line">        z&#x3D;z*10+x%10;</span><br><span class="line">        x&#x3D;x&#x2F;10;</span><br><span class="line">    &#125;</span><br><span class="line">    if(y&#x3D;&#x3D;z) return true;</span><br><span class="line">    else return false;</span><br><span class="line">&#125;</span><br><span class="line">else return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2020/11/20/%E5%85%B3%E4%BA%8E%E5%9B%9E%E6%96%87%E6%95%B0%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/11/07/%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%AE%97%E6%B3%95/">爬楼梯</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-11-07</span>
-      <p><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。<br>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？<br>注意：给定 n 是一个正整数。<br>示例 1：<br>输入： 2<br>输出： 2<br>解释： 有两种方法可以爬到楼顶。<br>  1 阶 + 1 阶<br>  2 阶<br>示例 2：<br>输入： 3<br>输出： 3<br>解释： 有三种方法可以爬到楼顶。<br> 1 阶 + 1 阶 + 1 阶<br>  1 阶 + 2 阶<br>  2 阶 + 1 阶<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xn854d/">题目</a></p>
-<h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>开始我是先把算法都列举出来，比如5阶时：1与2的结合就有7种，1+1…+1有一种，加起来就有8种。我本来想找出1+2结合的规律，但是我能力有限，我改用找总数的规律，我发现阶梯1、2、3、4、5、6<br>对应的的总数，分别为1、2、3、5、8、13.刚好符合斐波那契数列，也就是前面两个数相加等于后一位数所以我写的代码如下。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&quot;stdio.h&quot;</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,n;</span><br><span class="line">	int a[10];</span><br><span class="line">	printf(&quot;输入楼梯阶层：\n&quot;);</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	a[0]&#x3D;1;</span><br><span class="line">	a[1]&#x3D;1;</span><br><span class="line">	for(i&#x3D;2;i&lt;&#x3D;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		a[i]&#x3D;a[i-1]+a[i-2];</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;一共有%d种方法走上该楼梯\n&quot;,a[i-1]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/11/07/%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%AE%97%E6%B3%95/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/11/01/hello-world/">Hello World</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-11-01</span>
-      <p><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/11/01/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
+      <div class="post-button"><a class="btn" href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
 
-
+<div id="pagination">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"></a>
+</div>
 
 <footer>
   <div>
@@ -434,17 +682,17 @@ return k;</code></pre>
   </div>
   <nav class="menu-container">
   <ul class="menu-items">
-    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
-    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
     
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
         <ul>
           <li><a target="_blank" rel="noopener" href="https://hurigou.github.io">github</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>友链</span>
+      <i class="fa fa-link fa-fw"></i>Friends</span>
         <ul>
           <li> <a href="https://mail.qq.com/cgi-bin/frame_html?sid" target="_blank">qq邮箱</a></li>
         </ul>
