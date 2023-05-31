@@ -81,6 +81,17 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2 class="title"><a href="/2023/05/31/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0%E9%94%99%E8%AF%AF/"></a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-05-31</span>
+      <p><h2 id="没有写返回只报错信息"><a href="#没有写返回只报错信息" class="headerlink" title="没有写返回只报错信息"></a>没有写返回只报错信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It&#39;s likely that neither a Result Type nor a Result Map was specified.] with root cause</span><br></pre></td></tr></table></figure>
+
+<p>在xml配置文件中写sql时，没有写ResultType就会报错</p>
+</p>
+      <div class="post-button"><a class="btn" href="/2023/05/31/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0%E9%94%99%E8%AF%AF/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2 class="title"><a href="/2023/05/08/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/"></a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2023-05-08</span>
       <p><h2 id="刚上传的图片需要重启才能访问的问题："><a href="#刚上传的图片需要重启才能访问的问题：" class="headerlink" title="刚上传的图片需要重启才能访问的问题："></a>刚上传的图片需要重启才能访问的问题：</h2><ul>
@@ -360,34 +371,6 @@ return k;</code></pre>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>细心细心，一定要细心；做题的时候最好是现在草稿纸上写好，想法什么的都写下，再慢慢整理思考，然后把做好的代码放到编译器上执行，再修改其他错误；</p>
 </p>
       <div class="post-button"><a class="btn" href="/2020/11/27/%E5%85%B3%E4%BA%8E%E5%88%A0%E9%99%A4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2 class="title"><a href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/">罗马数字转换</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2020-11-23</span>
-      <p><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br><span class="line">例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</span><br></pre></td></tr></table></figure>
-<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。</span><br><span class="line">X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 </span><br><span class="line">C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</span><br><span class="line">给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</span><br></pre></td></tr></table></figure>
-<p>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
-<p>示例 2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure>
-<p>示例 4:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: L &#x3D; 50, V&#x3D; 5, III &#x3D; 3.</span><br></pre></td></tr></table></figure>
-<p>示例 5:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M &#x3D; 1000, CM &#x3D; 900, XC &#x3D; 90, IV &#x3D; 4.</span><br></pre></td></tr></table></figure>
-
-<p>提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。</span><br><span class="line">IC 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。</span><br></pre></td></tr></table></figure>
-<h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/roman-to-integer/">题目链接</a></h3><h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>题目解释的也非常清楚，关键的就在于当判断值是<code>I X C</code>时需要判断下一位是否<code>V X</code> 若是的话该值就需要减去一，反之加一。对于<code>X C</code>也是一样。刚开始我的代码是想着用for{if~else}来判定的，但是写出来就是太长了，所以我便参考了力扣题解上面的做法。</p>
-<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int romanToInt(char * s)&#123;</span><br><span class="line">int sum&#x3D;0;</span><br><span class="line">while(*s)&#123;</span><br><span class="line">    switch(*s)&#123;</span><br><span class="line">        case&#39;I&#39;: (*(s+1)&#x3D;&#x3D;&#39;X&#39;||*(s+1)&#x3D;&#x3D;&#39;V&#39;)?(sum-&#x3D;1):(sum+&#x3D;1);break;</span><br><span class="line">        case&#39;V&#39;: sum+&#x3D;5;break;</span><br><span class="line">        case&#39;X&#39;: (*(s+1)&#x3D;&#x3D;&#39;L&#39;||*(s+1)&#x3D;&#x3D;&#39;C&#39;)?(sum-&#x3D;10):(sum+&#x3D;10);break;</span><br><span class="line">        case&#39;L&#39;: sum+&#x3D;50;break;</span><br><span class="line">        case&#39;C&#39;: (*(s+1)&#x3D;&#x3D;&#39;D&#39;||*(s+1)&#x3D;&#x3D;&#39;M&#39;)?(sum-&#x3D;100):(sum+&#x3D;100);break;</span><br><span class="line">        case&#39;D&#39;: sum+&#x3D;500;break;</span><br><span class="line">        case&#39;M&#39;: sum+&#x3D;1000;break;</span><br><span class="line">        default:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    s++;</span><br><span class="line">&#125;</span><br><span class="line">return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><p>这道题目主要要抓住<code>I X C</code>在对应数的右边就加一，左边减一。还要清楚函数传过来的指针是一个字符数组的首地址。</p>
-</p>
-      <div class="post-button"><a class="btn" href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
     </div>
   </div>
 
