@@ -104,7 +104,7 @@
 <h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int romanToInt(char * s)&#123;</span><br><span class="line">int sum&#x3D;0;</span><br><span class="line">while(*s)&#123;</span><br><span class="line">    switch(*s)&#123;</span><br><span class="line">        case&#39;I&#39;: (*(s+1)&#x3D;&#x3D;&#39;X&#39;||*(s+1)&#x3D;&#x3D;&#39;V&#39;)?(sum-&#x3D;1):(sum+&#x3D;1);break;</span><br><span class="line">        case&#39;V&#39;: sum+&#x3D;5;break;</span><br><span class="line">        case&#39;X&#39;: (*(s+1)&#x3D;&#x3D;&#39;L&#39;||*(s+1)&#x3D;&#x3D;&#39;C&#39;)?(sum-&#x3D;10):(sum+&#x3D;10);break;</span><br><span class="line">        case&#39;L&#39;: sum+&#x3D;50;break;</span><br><span class="line">        case&#39;C&#39;: (*(s+1)&#x3D;&#x3D;&#39;D&#39;||*(s+1)&#x3D;&#x3D;&#39;M&#39;)?(sum-&#x3D;100):(sum+&#x3D;100);break;</span><br><span class="line">        case&#39;D&#39;: sum+&#x3D;500;break;</span><br><span class="line">        case&#39;M&#39;: sum+&#x3D;1000;break;</span><br><span class="line">        default:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    s++;</span><br><span class="line">&#125;</span><br><span class="line">return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><p>这道题目主要要抓住<code>I X C</code>在对应数的右边就加一，左边减一。还要清楚函数传过来的指针是一个字符数组的首地址。</p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -120,7 +120,7 @@
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-number/">链接</a></p>
 <h3 id="写题过程"><a href="#写题过程" class="headerlink" title="写题过程"></a>写题过程</h3><p>刚开始我打把每一位上面的数字都找出来，最后我发现所给的数字可能不只是三位数，可能是四位、五位数，最多到十位数。所以这种方法是很麻烦的。在经过很长时间后，实在想不出来就在题解上找到了非常简单的方法。首先x被10求余就会得到最后面的那一位数字，再将该数字赋值给另一变量。x再除以10就会得到除最后面的所有数字然后返回循环，知道x=0就退出循环；再之后就是简单的判断返回值了。</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bool isPalindrome(int x)&#123;</span><br><span class="line">long z&#x3D;0,y&#x3D;x;</span><br><span class="line">if(x&gt;&#x3D;0)&#123;</span><br><span class="line">    while(x!&#x3D;0)&#123;</span><br><span class="line">        z&#x3D;z*10+x%10;</span><br><span class="line">        x&#x3D;x&#x2F;10;</span><br><span class="line">    &#125;</span><br><span class="line">    if(y&#x3D;&#x3D;z) return true;</span><br><span class="line">    else return false;</span><br><span class="line">&#125;</span><br><span class="line">else return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-      <div class="post-button"><a class="btn" href="/2020/11/20/%E5%85%B3%E4%BA%8E%E5%9B%9E%E6%96%87%E6%95%B0%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/11/20/%E5%85%B3%E4%BA%8E%E5%9B%9E%E6%96%87%E6%95%B0%E9%97%AE%E9%A2%98/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -131,7 +131,7 @@
 <h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>开始我是先把算法都列举出来，比如5阶时：1与2的结合就有7种，1+1…+1有一种，加起来就有8种。我本来想找出1+2结合的规律，但是我能力有限，我改用找总数的规律，我发现阶梯1、2、3、4、5、6<br>对应的的总数，分别为1、2、3、5、8、13.刚好符合斐波那契数列，也就是前面两个数相加等于后一位数所以我写的代码如下。</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&quot;stdio.h&quot;</span><br><span class="line">void main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,n;</span><br><span class="line">	int a[10];</span><br><span class="line">	printf(&quot;输入楼梯阶层：\n&quot;);</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	a[0]&#x3D;1;</span><br><span class="line">	a[1]&#x3D;1;</span><br><span class="line">	for(i&#x3D;2;i&lt;&#x3D;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		a[i]&#x3D;a[i-1]+a[i-2];</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;一共有%d种方法走上该楼梯\n&quot;,a[i-1]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/11/07/%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%AE%97%E6%B3%95/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/11/07/%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%AE%97%E6%B3%95/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -152,7 +152,7 @@
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 </p>
-      <div class="post-button"><a class="btn" href="/2020/11/01/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>Read More</a></div>
+      <div class="post-button"><a class="btn" href="/2020/11/01/hello-world/" rel="noopener"><i class="fa fa-angle-double-right fa-fw"></i>阅读更多</a></div>
     </div>
   </div>
 
@@ -194,17 +194,17 @@
   </div>
   <nav class="menu-container">
   <ul class="menu-items">
-    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
-    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
     
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
           <li><a target="_blank" rel="noopener" href="https://hurigou.github.io">github</a></li>
         </ul>
     </li>
     <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>Friends</span>
+      <i class="fa fa-link fa-fw"></i>友链</span>
         <ul>
           <li> <a href="https://mail.qq.com/cgi-bin/frame_html?sid" target="_blank">qq邮箱</a></li>
         </ul>
