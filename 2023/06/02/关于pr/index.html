@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content=#58b77a>
-  <title>关于回文数问题 | 桥穆边境</title>
+  <title>桥穆边境</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="家源">
   <meta name="keywords" content="">
@@ -69,8 +69,8 @@
   <div class="overlay">
   <div class="page-title">
     <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
-    <span>2020-11-20</span>
-    <h2>关于回文数问题</h2>
+    <span>2023-06-02</span>
+    <h2></h2>
     
     </div>
 </div>
@@ -80,15 +80,25 @@
   <div class="lx-post">
     <div class="lx-entry padding">
       <div>
-        <h2 id="回文数"><a href="#回文数" class="headerlink" title="回文数"></a>回文数</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。<br>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 121</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-<p>示例 2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: -121</span><br><span class="line">输出: false</span><br><span class="line">解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: 10</span><br><span class="line">输出: false</span><br><span class="line">解释: 从右向左读, 为 01 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-number/">链接</a></p>
-<h3 id="写题过程"><a href="#写题过程" class="headerlink" title="写题过程"></a>写题过程</h3><p>刚开始我打把每一位上面的数字都找出来，最后我发现所给的数字可能不只是三位数，可能是四位、五位数，最多到十位数。所以这种方法是很麻烦的。在经过很长时间后，实在想不出来就在题解上找到了非常简单的方法。首先x被10求余就会得到最后面的那一位数字，再将该数字赋值给另一变量。x再除以10就会得到除最后面的所有数字然后返回循环，知道x=0就退出循环；再之后就是简单的判断返回值了。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bool isPalindrome(int x)&#123;</span><br><span class="line">long z&#x3D;0,y&#x3D;x;</span><br><span class="line">if(x&gt;&#x3D;0)&#123;</span><br><span class="line">    while(x!&#x3D;0)&#123;</span><br><span class="line">        z&#x3D;z*10+x%10;</span><br><span class="line">        x&#x3D;x&#x2F;10;</span><br><span class="line">    &#125;</span><br><span class="line">    if(y&#x3D;&#x3D;z) return true;</span><br><span class="line">    else return false;</span><br><span class="line">&#125;</span><br><span class="line">else return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h1><ul>
+<li><p>作用</p>
+<ol>
+<li>首先调整图层是一个覆盖的作用，将该图层放在视频上方轨道，原视频就会被遮盖，这个可以做一个模糊转场</li>
+<li>首先将调整图层放在两端视频连接处</li>
+<li>右边效果中选中高斯模糊，拖到调整图层上</li>
+<li>左边的效果控件设置模糊度，即可完成。</li>
+</ol>
+</li>
+<li><p>视频大小调整</p>
+<ol>
+<li>右边效果中选中裁剪</li>
+<li>将裁剪拖到需要裁剪的视频中</li>
+<li>左边找到裁剪，调整视频到合适的大小即可</li>
+</ol>
+</li>
+<li></li>
+</ul>
+<h1 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h1>
       </div>
     </div>
   </div>
@@ -96,12 +106,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/11/23/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2/">
+		<a class="copy" href="/2023/07/11/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%BC%80%E6%BA%90%E6%80%9D%E6%83%B3%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AASEO%E5%8F%8B%E5%A5%BD%E5%9E%8B%E7%BD%91%E7%AB%99(%E8%BD%AC%E8%BD%BD)/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>罗马数字转换</h3>
+						<h3></h3>
 					</div>
 				</div>
 			</div>
@@ -109,12 +119,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2020/11/07/%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%AE%97%E6%B3%95/">
+		<a class="copy" href="/2023/05/31/%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0%E9%94%99%E8%AF%AF/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>爬楼梯</h3>
+						<h3></h3>
 					</div>
 				</div>
 			</div>
